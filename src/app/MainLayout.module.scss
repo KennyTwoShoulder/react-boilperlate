@@ -1,0 +1,9 @@
+@import 'styles/variables';
+
+.drawer {
+  :global {
+    a.active {
+      color: $palette-primary-light;
+    }
+  }
+}
