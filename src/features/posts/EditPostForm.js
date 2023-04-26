@@ -1,0 +1,59 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { postUpdated, selectPostById } from './postsSlice';
+import MainPage from 'app/MainPage';
+
+function EditPostForm() {
+  const { postId } = useParams();
+
+  const post = useSelector(state =>
+    selectPostById(state, postId)
+  );
+
+  const [title, setTitle] = useState(post.title);
+  const [content, setContent] = useState(post.content);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onTitleChanged = e => setTitle(e.target.value);
+  const onContentChanged = e => setContent(e.target.value);
+
+  const onSavePostClicked = () => {
+    if (title && content) {
+      dispatch(postUpdated({ id: postId, title, content }));
+      navigate(`/posts/${postId}`);
+    }
+  };
+
+  return (
+    <MainPage>
+      <h2>Edit Post</h2>
+      <form>
+        <label htmlFor="postTitle">Post Title:</label>
+        <input
+          type="text"
+          id="postTitle"
+          name="postTitle"
+          placeholder="What's on your mind?"
+          value={title}
+          onChange={onTitleChanged}
+        />
+        <label htmlFor="postContent">Content:</label>
+        <textarea
+          id="postContent"
+          name="postContent"
+          value={content}
+          onChange={onContentChanged}
+        />
+      </form>
+      <button type="button" onClick={onSavePostClicked}>
+        Save Post
+      </button>
+    </MainPage>
+  );
+}
+
+export default EditPostForm;

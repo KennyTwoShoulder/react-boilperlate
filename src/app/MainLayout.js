@@ -3,6 +3,7 @@ import styles from './MainLayout.module.scss';
 /* Imports for NPM libraries */
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import {
   Box,
@@ -21,6 +22,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 /* Imports for local files */
 import { mainListItems, secondaryListItems } from './listItems';
+import { fetchNotifications } from 'features/notifications/notificationsSlice';
 
 const drawerWidth = 240;
 
@@ -70,8 +72,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function DashboardLayout() {
   const [open, setOpen] = useState(true);
+  const dispatch = useDispatch();
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const fetchNewNotifications = () => {
+    dispatch(fetchNotifications());
   };
 
   return (
@@ -126,6 +133,9 @@ function DashboardLayout() {
           {mainListItems}
           <Divider sx={{ my: 1 }} />
           {secondaryListItems}
+          <button className="button" onClick={fetchNewNotifications}>
+            Refresh Notifications
+          </button>
         </List>
       </Drawer>
       <Outlet />

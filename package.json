@@ -23,7 +23,14 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "sass": "^1.62.0"
+    "@faker-js/faker": "^7.6.0",
+    "@mswjs/data": "^0.12.0",
+    "date-fns": "^2.29.3",
+    "mock-socket": "^9.2.1",
+    "msw": "^1.2.1",
+    "sass": "^1.62.0",
+    "seedrandom": "^3.0.5",
+    "txtgen": "^3.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
