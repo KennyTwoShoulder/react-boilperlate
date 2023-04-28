@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  CircularProgress,
-} from '@mui/material';
+import { useSelector } from 'react-redux';
 
 import { useAddNewPostMutation } from 'api/apiSlice';
 
