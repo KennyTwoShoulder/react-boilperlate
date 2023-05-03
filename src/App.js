@@ -18,6 +18,7 @@ import EditPostForm from 'features/posts/EditPostForm';
 import UsersListPage from 'features/users/UsersListPage';
 import UserPage from 'features/users/UserPage';
 import NotificationsListPage from 'features/notifications/NotificationsListPage';
+import PlaygroundPage from 'features/playground/PlaygroundPage';
 import ErrorPage from 'app/ErrorPage';
 
 const mdTheme = createTheme();
@@ -36,6 +37,7 @@ function App() {
           <Route path="users" element={<UsersListPage />} />
           <Route path="users/:userId" element={<UserPage />} />
           <Route path="notifications" element={<NotificationsListPage />} />
+          <Route path="playground" element={<PlaygroundPage />} />
 
           <Route path="*" element={<ErrorPage />} />
         </Route>
