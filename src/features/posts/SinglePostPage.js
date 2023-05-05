@@ -7,7 +7,7 @@ import {
 import MainPage from "app/MainPage";
 import PostAuthor from './PostAuthor';
 import TimeAgo from './TimeAgo';
-import { useGetPostQuery } from "api/apiSlice";
+import { useGetPostQuery } from "api/postApi";
 
 function SinglePostPage() {
   const { postId } = useParams();

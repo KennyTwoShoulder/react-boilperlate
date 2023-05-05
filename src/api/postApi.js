@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const apiSlice = createApi({
+export const postApi = createApi({
   // The cache reducer expects to be added at `state.api`
-  reducerPath: 'api',
+  reducerPath: 'postApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/fakeApi' }),
   tagTypes: ['Post'],
   endpoints: builder => ({
@@ -43,4 +43,4 @@ export const {
   useGetPostQuery,
   useAddNewPostMutation,
   useEditPostMutation,
-} = apiSlice;
+} = postApi;

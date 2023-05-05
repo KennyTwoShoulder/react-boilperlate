@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGetPostQuery, useEditPostMutation } from "api/apiSlice";
+import { useGetPostQuery, useEditPostMutation } from "api/postApi";
 import MainPage from 'app/MainPage';
 
 function EditPostForm() {

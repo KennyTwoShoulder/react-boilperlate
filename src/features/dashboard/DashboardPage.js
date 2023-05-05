@@ -6,6 +6,6 @@ function DashboardPage() {
       Dashboard
     </MainPage>
   )
-};
+}
 
 export default DashboardPage;

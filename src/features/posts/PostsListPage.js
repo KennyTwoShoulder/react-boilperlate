@@ -8,7 +8,7 @@ import MainPage from 'app/MainPage';
 import PostAuthor from './PostAuthor';
 import TimeAgo from './TimeAgo';
 import AddPostForm from 'features/posts/AddPostForm';
-import { useGetPostsQuery } from 'api/apiSlice';
+import { useGetPostsQuery } from 'api/postApi';
 
 function PostExcerpt({ post }) {
   return (
