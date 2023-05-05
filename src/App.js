@@ -20,6 +20,14 @@ import UserPage from 'features/users/UserPage';
 import NotificationsListPage from 'features/notifications/NotificationsListPage';
 import PlaygroundPage from 'features/playground/PlaygroundPage';
 import ErrorPage from 'app/ErrorPage';
+import frappe from 'api/frappe';
+
+const auth = frappe.auth();
+
+auth
+  .loginWithUsernamePassword({ username: 'Administrator', password: 'changeit' })
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
 
 const mdTheme = createTheme();
 
