@@ -16,6 +16,7 @@ function MainPage(props) {
       flexGrow: 1,
       height: '100vh',
       overflow: 'auto',
+      padding: '0 24px',
     }}
   >
     <Toolbar />

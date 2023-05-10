@@ -3,7 +3,7 @@ import MainPage from "app/MainPage";
 function DashboardPage() {
   return (
     <MainPage id="dashboard-page">
-      Dashboard
+      <h2>Dashboard</h2>
     </MainPage>
   )
 }
