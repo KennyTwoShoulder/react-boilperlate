@@ -1,6 +1,9 @@
+import { useState, useReducer } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -11,12 +14,19 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import { useLoginMutation, useMeQuery } from "api/authApi";
 
-
 function SignInPage() {
   const location = useLocation();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const { isSuccess: meSuccess, isLoading: meLoading } = useMeQuery();
   const { from = '' } = location.state || {};
   const [login, { isSuccess: loginSuccess, isError }] = useLoginMutation();
+  const [formInput, setFormInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      email: '',
+      password: '',
+    }
+  );
 
   if (meLoading) {
     return <></>;
@@ -31,20 +41,33 @@ function SignInPage() {
     }
   }
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
     try {
       await login({
-        usr: data.get('email').trim(),
-        pwd: data.get('password').trim(),
+        usr: formInput.email,
+        pwd: formInput.password,
         device: 'mobile', // make set-cookie work on ERPNext
       }).unwrap();
     } catch (error) {
       console.error('Failed to login: ', error);
+      setOpenSnackbar(true);
     }
   };
+
+  const handleInput = event => {
+    const name = event.target.name;
+    const newValue = event.target.value.trim();
+    setFormInput({ [name]: newValue });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -70,18 +93,22 @@ function SignInPage() {
             id="email"
             label="Email Address"
             name="email"
+            defaultValue={formInput.email}
             autoComplete="email"
             autoFocus
+            onChange={handleInput}
           />
           <TextField
             margin="normal"
             required
             fullWidth
             name="password"
+            defaultValue={formInput.password}
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleInput}
           />
           <Button
             type="submit"
@@ -99,6 +126,9 @@ function SignInPage() {
             </Grid>
           </Grid>
         </Box>
+        <Snackbar open={openSnackbar} onClose={handleCloseSnackbar}>
+          <Alert severity="error">Invalid email or password</Alert>
+        </Snackbar>
       </Box>
     </Container>
   );
